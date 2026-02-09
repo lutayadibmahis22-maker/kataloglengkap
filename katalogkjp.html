@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Resmi - Karunia Jaya Pentol</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #FFC107; /* Kuning Emas */
+            --bg-color: #FFF8E1;      /* Krem Lembut */
+            --text-color: #333;       /* Hitam Abu */
+            --accent-color: #D32F2F;  /* Merah Harga */
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        /* --- 1. HEADER --- */
+        header {
+            background: linear-gradient(135deg, #FFC107, #FF9800);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .logo-perusahaan {
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .header-text {
+            text-align: left;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* --- 2. BADGE SYSTEM --- */
+        .card-container {
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 5px;
+            text-transform: uppercase;
+            z-index: 5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .bg-best-seller { background-color: #D32F2F; color: white; border: 1px solid #FFC107; }
+        .bg-recommended { background-color: #1976D2; color: white; }
+        .bg-best-value { background-color: #388E3C; color: white; }
+
+        /* --- 3. LAYOUT GRID --- */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            cursor: zoom-in;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .card-body {
+            padding: 15px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        .product-price {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .btn-wa {
+            background-color: #25D366;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .btn-wa:hover {
+            background-color: #128C7E;
+        }
+
+        /* --- 4. LOKASI & FOOTER --- */
+        .location-section {
+            background: white;
+            padding: 40px 20px;
+            margin-top: 50px;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4E342E;
+            text-transform: uppercase;
+        }
+
+        .map-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 350px;
+            border: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #333;
+            color: var(--primary-color);
+        }
+
+        .social-icons { margin-bottom: 20px; }
+
+        .social-link {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            margin: 0 8px;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover { transform: translateY(-3px); background: var(--primary-color); color: #333; }
+
+        /* --- 5. MODAL --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 9999; 
+            left: 0; top: 0;
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center; align-items: center; flex-direction: column;
+        }
+
+        .modal-content {
+            max-width: 90%; max-height: 80vh;
+            border: 4px solid #fff; border-radius: 8px;
+            animation: zoom 0.3s;
+        }
+
+        .close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; }
+        
+        @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
+
+        @media (max-width: 600px) {
+            .header-container { flex-direction: column; text-align: center; }
+            .header-text { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <img src="https://i.ibb.co.com/7tN39fP6/Logo-KJ-removebg-preview.png" alt="Logo Karunia Jaya" class="logo-perusahaan">
+            <div class="header-text">
+                <h1>KATALOG PRODUK</h1>
+                <p>KARUNIA JAYA PENTOL | Winongan - Pasuruan</p>
+            </div>
+        </div>
+        <small style="color: #FFF8E1; display: block; margin-top: 10px;">Klik gambar untuk memperbesar</small>
+    </header>
+
+    <div class="container">
+        <div class="product-grid">
+
+            <div class="card card-container">
+                <div class="badge bg-best-seller"><i class="fas fa-fire"></i> Best Seller</div>
+                <img src="https://i.ibb.co.com/ZpwKGndP/KJ-Kecil.jpg" alt="Pentol KJ Kecil" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol KJ Kecil</div>
+                    <div class="product-price">Rp 15.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+KJ+Kecil" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card card-container">
+                <div class="badge bg-recommended"><i class="fas fa-thumbs-up"></i> Recommended</div>
+                <img src="https://i.ibb.co.com/n53VyKB/Whats-App-Image-2026-01-17-at.jpg" alt="Bakso Daging Kecil" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Bakso Daging Kecil</div>
+                    <div class="product-price">Rp 25.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Bakso+Daging+Kecil" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card card-container">
+                <div class="badge bg-best-value"><i class="fas fa-tag"></i> Best Value</div>
+                <img src="https://i.ibb.co.com/qY7V4jH0/Whats-App-Image-2026-01-17-at-1.jpg" alt="Pentol Sedang Isi 25" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Sedang Isi 25</div>
+                    <div class="product-price">Rp 48.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+Sedang+Isi+25" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/QvWZyG1D/iiui.jpg" alt="Adonan Bakso Solo Halus" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Adonan Bakso Solo Halus</div>
+                    <div class="product-price">Rp 38.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Adonan+Bakso+Solo+Halus" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/SD8Yz2Zx/Whats-App-Image-2026-01-17-at-yuf.jpg" alt="Adonan Ayam Premium" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Adonan Ayam Premium</div>
+                    <div class="product-price">Rp 21.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Adonan+Ayam+Premium" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/g810Q4D/lui.jpg" alt="Adonan Bakso Solo Kasar" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Adonan Bakso Solo Kasar</div>
+                    <div class="product-price">Rp 38.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Adonan+Bakso+Solo+Kasar" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+          
+            <div class="card">
+                <img src="https://i.ibb.co.com/7tYP5zDc/sapi-jpg.jpg" alt="Adonan Bakso Sapi" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Adonan Bakso Sapi</div>
+                    <div class="product-price">Rp 25.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Adonan+Bakso+Sapi" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/NnNMbXJH/Kj-Besar.jpg" alt="Pentol KJ Besar" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol KJ Besar</div>
+                    <div class="product-price">Rp 15.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+KJ+Besar" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+          
+                      <div class="card">
+                <img src="https://i.ibb.co.com/TB3YGP04/Whats-App-Image-2026-01-17-at-10-03-11.jpg" alt="Pentol Daging Besar" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Daging Besar</div>
+                    <div class="product-price">Rp 25.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+Daging+Besar" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/ynHBQmFD/Whats-App-Image-2026-01-1.jpg" alt="Pentol Klenger Isi 4" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Klenger Isi 4</div>
+                    <div class="product-price">Rp 40.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+Klenger+Isi+4" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/NX7wsqh/Whats-App-Image-2026-01-17-at-10-03-12.jpg" alt="Pentol Besar Isi 10" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Besar Isi 10</div>
+                    <div class="product-price">Rp 40.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+Besar+Isi+10" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/Pvkvk3Jn/Whats-App-Image-2026-01-17-at-10-03-13.jpg" alt="Petol Jumbo Isi 6" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Jumbo Isi 6</div>
+                    <div class="product-price">Rp 40.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+Pentol+Jumbo+Isi+6" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+          
+                      <div class="card">
+                <img src="https://i.ibb.co.com/KcV6vsst/isi-daging.jpg" alt="Petol Jumbo Isi Daging" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Jumbo Isi Daging</div>
+                    <div class="product-price">Rp 25.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+Pentol+Jumbo+Isi+Daging" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/N24wwvv5/puyuh.jpg" alt="Pentol Isi Puyuh" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Isi Puyuh</div>
+                    <div class="product-price">Rp 25.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+Isi+Puyuh" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.ibb.co.com/PvMHggDt/Pedas.png" alt="Pentol Isi Pedas" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Pedas</div>
+                    <div class="product-price">Rp 25.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+Pedas" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+          
+                      <div class="card">
+                <img src="https://i.ibb.co.com/5X41CZbq/Jamur.png" alt="Pentol Isi Jamur" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Isi Jamur</div>
+                    <div class="product-price">Rp 25.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+Isi+Jamur" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+                      <div class="card">
+                <img src="https://i.ibb.co.com/7NxM6FZd/Keju.png" alt="Pentol Isi Keju" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Pentol Isi Keju</div>
+                    <div class="product-price">Rp 25.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Pentol+Isi+Keju" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+    
+                                          <div class="card">
+                <img src="https://i.ibb.co.com/LDPLBd2j/siomay-jpg.jpg" alt="Siomay" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Siomay</div>
+                    <div class="product-price">Rp 25.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Siomay" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+    
+                                <div class="card">
+                <img src="https://i.ibb.co.com/LhQfkhCP/cilok.png" alt="Cilok Kriwil" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Cilok Kriwil</div>
+                    <div class="product-price">Rp 18.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Cilok+Kriwil" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+          
+                                          <div class="card">
+                <img src="https://i.ibb.co.com/d0hPMN46/tahu-jpg.jpg" alt="Tahu Daging" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Tahu Daging</div>
+                    <div class="product-price">Rp 20.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Tahu+Daging" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+          
+                                                    <div class="card">
+                <img src="https://i.ibb.co.com/S47G3VXW/goreng-jpg.jpg" alt="Goreng" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Goreng</div>
+                    <div class="product-price">Rp 20.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Goreng" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+          
+                             <div class="card">
+                <img src="https://i.ibb.co.com/qLwcWN0P/Kering-besar.png" alt="Bumbu Kering Besar" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Bumbu Kering Besar</div>
+                    <div class="product-price">Rp 15.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+bumbu+Kering+Besar" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+                                          <div class="card">
+                <img src="https://i.ibb.co.com/DBx49Q0/mini.png" alt="Bumbu Kering Mini" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Bumbu Kering Mini</div>
+                    <div class="product-price">Rp 5.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Bumbu+Kering+Mini" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+                                                    <div class="card">
+                <img src="https://i.ibb.co.com/CsKxhDZD/Basah.png" alt="Bumbu Basah" class="card-img" onclick="openModal(this)">
+                <div class="card-body">
+                    <div class="product-name">Bumbu Basah</div>
+                    <div class="product-price">Rp 10.000</div>
+                    <a href="https://wa.me/6281330085835?text=Halo+admin,+saya+mau+pesan+Bumbu+Basah" class="btn-wa">Pesan Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="location-section">
+        <h2 class="section-title">Lokasi Karunia Jaya Pentol Winongan</h2>
+        <div class="map-wrapper">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.60330268646!2d112.9337496758857!3d-7.725640076559411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7c95d36660d3d%3A0x74fd0f4bde1eb181!2sKarunia%20Jaya%20Pentol!5e0!3m2!1sid!2sid!4v1769002159192!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                width="100%" 
+                height="350" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+  <div class="location-section">
+        <h2 class="section-title">Lokasi Karunia Jaya Pentol Pasuruan (Kumala)</h2>
+        <div class="map-wrapper">
+            <iframe 
+                src=https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.4228030421514!2d112.90493057588462!3d-7.63759797554332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7c7dfc85b56a9%3A0x6e342c2dd72f0bd6!2sKarunia%20Jaya%20Pentol%20Kumala!5e0!3m2!1sid!2sid!4v1769002122073!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                width="100%" 
+                height="350" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+  
+  <div class="location-section">
+        <h2 class="section-title">Lokasi Karunia Jaya Pentol Bangil</h2>
+        <div class="map-wrapper">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.7481156299796!2d112.7765794758841!3d-7.602367375140248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7db3e83b453a3%3A0xa2728dc3682e9c83!2sKarunia%20Jaya%20Pentol%20Bangil!5e0!3m2!1sid!2sid!4v1769002274721!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                width="100%" 
+                height="350" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+  <div class="location-section">
+        <h2 class="section-title">Lokasi Karunia Jaya Pentol Malang</h2>
+        <div class="map-wrapper">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.1790876849873!2d112.66058697588889!3d-7.980432579571156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6290053817365%3A0x2779f5280a021719!2sKarunia%20Jaya%20Pentol%20Sawojajar%20Malang!5e0!3m2!1sid!2sid!4v1769002329529!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                width="100%" 
+                height="350" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+  <div class="location-section">
+        <h2 class="section-title">Lokasi Karunia Jaya Pentol Probolinggo</h2>
+        <div class="map-wrapper">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.0959604093932!2d113.21000937588627!3d-7.779649477189013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7ad9b792193f1%3A0x1725909edee7903e!2sKarunia%20Jaya%20Pentol%20Probolinggo!5e0!3m2!1sid!2sid!4v1769002380576!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                width="100%" 
+                height="350" 
+                style="border:0;"  
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://youtube.com/@Karuniajaya.pentol" target="_blank" class="social-link" title="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://tiktok.com/@Karuniajaya.pentol" target="_blank" class="social-link" title="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://instagram.com/Karuniajaya.pentol" target="_blank" class="social-link" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+
+        <p>&copy; 2026 Karunia Jaya Pentol. Dibuat dengan bangga di Winongan, Pasuruan.</p>
+    </footer>
+
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption" class="modal-caption"></div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+
+        function openModal(element) {
+            modal.style.display = "flex";
+            modalImg.src = element.src;
+            captionText.innerHTML = element.alt;
+            event.stopPropagation();
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
